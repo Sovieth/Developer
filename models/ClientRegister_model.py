@@ -3,8 +3,7 @@ from flask import request, redirect, url_for, render_template
 
 class User:
     
-    def register_new_user(signup):
-        
+    def register_new_user(signup): 
         existing_user = mongo.db.new_user.find_one({'email': signup['email']})
         if existing_user:
             return True
