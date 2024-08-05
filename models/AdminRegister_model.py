@@ -1,5 +1,4 @@
 from .. import mongo
-from flask import request, redirect, url_for, render_template
 
 class Register:
     
@@ -15,3 +14,8 @@ class Register:
     def queryfilter_by(email):
         user = mongo.db.new_admin.find_one({'email': email})
         return user
+    
+    
+    
+    
+    
