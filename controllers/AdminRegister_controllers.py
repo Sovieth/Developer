@@ -13,7 +13,7 @@ def admin_signup():
     
     admin_user_id = get_jwt_identity() 
     if admin_user_id is None:
-        if not get_admin.register_new_user(admin_collection): 
+        if not admin_collection.register_new_user(admin_collection): 
             return jsonify({'message': 'signup success'})
         else:
             return jsonify({'message': 'signup failed'}), 400
@@ -26,7 +26,7 @@ def admin_login():
         'password': request.json.get('password')
     }
     
-    user = get_admin.query.filter_by(email=admin_login['email']).first()
+    user = admin_login.query.filter_by(email=admin_login['email']).first()
     if user and bcrypt.check_password_hash(user.password, admin_login['password']):
         access_token = create_access_token(identity=user.id)
         return jsonify({'message': 'login success', 'access_token': access_token})
