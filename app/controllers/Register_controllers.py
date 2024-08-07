@@ -3,7 +3,6 @@ from flask_jwt_extended import JWTManager,create_access_token,jwt_required,get_j
 from..models.Register_model import user
 from bson.objectid import ObjectId 
 
-
 def signup():
     if request.method == 'POST':
         # Extract form data
@@ -18,10 +17,14 @@ def signup():
         return jsonify({"message": "successfully signup"})
     
 def login():
-    login_data = {
+     if request.method == 'POST':
+       details =  {
         'email': request.json.get('email'),
         'password': request.json.get('password')
     }
+    
+     user.create_new(details)
+     return jsonify({"message": "successfully login"})
     
 #     user = User.query.filter_by(email=login_data['email']).first()
 #     if user and bcrypt.checkpw(login_data['password'].encode('utf-8'), user.password.encode('utf-8')):
