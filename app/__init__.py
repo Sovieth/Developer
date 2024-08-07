@@ -11,5 +11,6 @@ def create_app():
     mongo.init_app(app)
     
     with app.app_context():
-        
+     from .routes import Register_routes
+     app.register_blueprint(Register_routes.app)
      return app
